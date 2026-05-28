@@ -27,6 +27,26 @@ app.use('/api/auth', authRoutes);
 app.use('/api/favorites', favoritesRoutes);
 app.use('/api/ai-suggestions', aiSuggestionsRoutes);
 
+// API 文档首页
+app.get('/', (_req, res) => {
+  res.json({
+    name: '天气 App API',
+    endpoints: {
+      'GET  /api/health': '健康检查',
+      'GET  /api/weather/current?city=城市名': '查询天气',
+      'GET  /api/weather/forecast?city=城市名': '天气预报',
+      'GET  /api/solar-term': '获取节气信息',
+      'GET  /api/solar-term/current': '获取当前节气',
+      'POST /api/auth/register': '注册 { email, password }',
+      'POST /api/auth/login': '登录 { email, password }',
+      'GET  /api/favorites': '获取收藏',
+      'POST /api/favorites': '添加收藏 { city }',
+      'DELETE /api/favorites/:city': '删除收藏',
+      'GET  /api/ai-suggestions': 'AI 建议',
+    }
+  });
+});
+
 // 健康检查
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
